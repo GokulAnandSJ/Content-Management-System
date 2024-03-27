@@ -30,7 +30,8 @@ public class User {
 	private LocalDate createdAt;
 	@LastModifiedDate
 	private LocalDate lastModifiedAt;
-	
+	@Column( columnDefinition = "boolean default false")
+    private boolean deleteUser  ;
 	
 	public int getUserId() {
 		return userId;
@@ -68,7 +69,12 @@ public class User {
 	public void setLastModifiedAt(LocalDate lastModifiedAt) {
 		this.lastModifiedAt = lastModifiedAt;
 	}
-	
+	public boolean isDeleteUser() {
+		return deleteUser;
+	}
+	public void setDeleteUser(boolean deleteUsre) {
+		this.deleteUser = deleteUsre;
+	}
 	
 	
 	
