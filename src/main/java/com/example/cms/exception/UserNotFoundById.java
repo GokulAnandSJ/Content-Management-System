@@ -1,10 +1,10 @@
 package com.example.cms.exception;
 
-public class UsernameNotFoundException extends RuntimeException {
+public class UserNotFoundById extends RuntimeException {
 
 	private String message;
 
-	public UsernameNotFoundException(String message) {
+	public UserNotFoundById(String message) {
 		super();
 		this.message = message;
 	}
