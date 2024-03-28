@@ -2,6 +2,7 @@ package com.example.cms.entity;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -32,6 +34,7 @@ public class User {
 	private LocalDate lastModifiedAt;
 	@Column( columnDefinition = "boolean default false")
     private boolean deleteUser  ;
+	
 	
 	public int getUserId() {
 		return userId;

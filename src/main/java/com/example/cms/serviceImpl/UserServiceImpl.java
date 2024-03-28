@@ -12,6 +12,7 @@ import com.example.cms.exception.UserAlreadyExistByEmailException;
 import com.example.cms.exception.UserNotFoundById;
 import com.example.cms.repositary.UserRepository;
 import com.example.cms.service.UserService;
+import com.example.cms.utility.ErrorStructure;
 import com.example.cms.utility.ResponseStructure;
 
 @Service
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService {
 			 user.setDeleteUser(true);
 			userRepository.save(user);
 			
-			return  ResponseEntity.ok(responseStructureString.setStatusCode(HttpStatus.OK.value()).setMessage("User Is Deactivated")
+			return  ResponseEntity.ok(responseStructureString.setStatusCode(HttpStatus.OK.value()).setMessage("User Is Deactivated Sucessfully")
 					.setData("Your Account is Deactivated Please Activated"));
 		}).orElseThrow(() -> new UserNotFoundById("Your Id is Not Found"));
 	}
@@ -86,5 +87,7 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.ok(responseStructure);
 			
 		}).orElseThrow(() -> new UserNotFoundById("User Id is Not Foud In DataBase"));
+		
+		
 	}
 }
