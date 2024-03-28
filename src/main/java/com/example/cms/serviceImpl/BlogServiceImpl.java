@@ -60,12 +60,12 @@ public class BlogServiceImpl implements BlogService {
 		return	userRepository.findById(userId).map(user->{
 			if(blogRepository.existsByTitle(blogRequestDTO.getTitle()))
 				throw new TitleNotAvailableException("Failed to Create Tiltle Because this Title already Exists");
-				if(blogRequestDTO.getTopics().length <1) {
+			if(blogRequestDTO.getTopics().length <1) {
 				throw new TopicNotSpecifiedException("Failed to create Blog Please write content");
 			}
 			Blog blog = mapToBlogEntity(blogRequestDTO);
 			blog.setUsers(Arrays.asList(user));
-			
+
 			blog = blogRepository.save(blog);
 			userRepository.save(user);
 			return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Blog Created Sucessfully")
@@ -78,10 +78,10 @@ public class BlogServiceImpl implements BlogService {
 		if(blogRepository.existsByTitle(title)) {
 			return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Title Is Available").setData(true));
 		}
-		
+
 		return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value()).setMessage("This Title already Exist Please Choose Another Title").setData(false));
 	}
-	
+
 	@Override
 	public ResponseEntity<ResponseStructure<BlogResponse>> findBlogById(int blogId) {
 		return blogRepository.findById(blogId).map(blog ->{
@@ -92,11 +92,14 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<BlogResponse>> ubdateBlogData(int blogId, BlogRequestDTO updatedBlog) {
-		return blogRepository.findById(blogId).map(blog ->{
-			blog = mapToBlogEntity(updatedBlog);
-			
-			return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Blog Updated Sucessfully").setData(mapToBlogResponse(blog)));
-		}).orElseThrow(() -> new BlogIdNotFoundException("Blog Id Not Found Please Check"));
+		Blog blog = mapToBlogEntity(updatedBlog);
+		return blogRepository.findById(blogId).map(exBlog->{
+			blog.setBlogId(exBlog.getBlogId());
+			exBlog=blogRepository.save(blog);
+			return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value())
+					.setMessage("Blog Updated Sucessfully")
+					.setData(mapToBlogResponse(blog)));
+			}).orElseThrow(() -> new BlogIdNotFoundException("Blog Id Not Found Please Check"));
 	}
-	
+
 }
