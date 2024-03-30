@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 @RestControllerAdvice
-public class ErrorIllegalAccessRequestException {
+public class IllegalAccessRequestExceptionHandler {
 
 	@ExceptionHandler
-	public ResponseEntity<ErrorStructure<String>> IllegalAccessRequestException(com.example.cms.exception.IllegalAccessRequestException ex){
+	public ResponseEntity<ErrorStructure<String>> handleIllegalAccessRequestException(com.example.cms.exception.IllegalAccessRequestException ex){
 		
 		ErrorStructure<String> errorStrecture = new ErrorStructure<>();
 		errorStrecture.setErrorCode(HttpStatus.NOT_FOUND.value());
