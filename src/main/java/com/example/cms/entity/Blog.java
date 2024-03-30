@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,15 +22,27 @@ public class Blog {
 	private String[] topics;
 	private String about;
 	
-	@ManyToMany
-	private List<User> users;
+	@ManyToOne
+	private User user;
 	
-	public List<User> getUsers() {
-		return users;
+	@OneToOne
+	private ContributionPanel contributionPanel;
+	
+	
+	public ContributionPanel getContributionPanel() {
+		return contributionPanel;
 	}
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setContributionPanel(ContributionPanel contributionPanel) {
+		this.contributionPanel = contributionPanel;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 	public int getBlogId() {
 		return blogId;
 	}
