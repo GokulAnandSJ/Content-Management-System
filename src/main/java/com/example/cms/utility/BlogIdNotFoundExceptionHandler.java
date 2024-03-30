@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.cms.exception.BlogIdNotFoundException;
 @RestControllerAdvice
-public class ErrorBlogIdNotFoundException {
+public class BlogIdNotFoundExceptionHandler {
 
 	@ExceptionHandler
-	public ResponseEntity<ErrorStructure<String>> blogIdNotFoundException(BlogIdNotFoundException ex){
+	public ResponseEntity<ErrorStructure<String>> handleBlogIdNotFoundException(BlogIdNotFoundException ex){
 		
 		ErrorStructure<String> errorStrecture = new ErrorStructure<>();
 		errorStrecture.setErrorCode(HttpStatus.NOT_FOUND.value());

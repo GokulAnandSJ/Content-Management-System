@@ -12,6 +12,7 @@ import com.example.cms.entity.ContributionPanel;
 import com.example.cms.exception.IllegalAccessRequestException;
 import com.example.cms.exception.PanelIdAlreadySetException;
 import com.example.cms.exception.PannelNotFoundByIdException;
+import com.example.cms.exception.UserHavingPanelException;
 import com.example.cms.exception.UserIdIsNotFound;
 import com.example.cms.exception.UserNotFoundById;
 import com.example.cms.repositary.BlogRepository;
@@ -45,22 +46,10 @@ public class ContributionPanelServiceImpl implements ContributionPanelService {
 			return contributionRepository.findById(panelId).map(panel ->{
 				if(!blogRepository.existsByUserAndContributionPanel(owner , panel)) 
 					throw new IllegalAccessRequestException("Failed To Add Contributior");
-//
-//				Optional<ContributionPanel> existingPanel = contributionRepository.findById(panelId);
-//
-////				if(existingPanel.isPresent()) {
-////					ContributionPanel exe = existingPanel.get();
-////						
-////					if(existingPanel.isPresent()==exe.getUsers().equals(owner)) {
-////						throw new PanelIdAlreadySetException("Entered Panel ID is Already Seted This User please Choose Another user");
-////						
-//					}
-//					if(existingPanel.isPresent()!=existingPanel.get().getUsers().equals(owner)) {
-//						throw new PanelIdAlreadySetException("Entered Panel ID is Already Seted This User please Choose Another user");
-//						
-//				}
 
 				return userRepository.findById(userId).map(contributor ->{
+					if(panel.getUsers().contains(contributor)==true)
+						throw new UserHavingPanelException("Entered user already having same panel please add another user");
 					panel.getUsers().add(contributor);
 					contributionRepository.save(panel);
 
