@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import com.example.cms.DAO.BlogRequestDTO;
 import com.example.cms.DAO.BlogResponse;
 import com.example.cms.entity.Blog;
+import com.example.cms.entity.ContributionPanel;
+import com.example.cms.entity.User;
 import com.example.cms.exception.BlogIdNotFoundException;
 import com.example.cms.exception.TitleNotAvailableException;
 import com.example.cms.exception.TopicNotSpecifiedException;
 import com.example.cms.exception.UserIdIsNotFound;
 import com.example.cms.repositary.BlogRepository;
+import com.example.cms.repositary.ContributionPanelRepository;
 import com.example.cms.repositary.UserRepository;
 import com.example.cms.service.BlogService;
 import com.example.cms.utility.ResponseStructure;
@@ -26,17 +29,20 @@ public class BlogServiceImpl implements BlogService {
 	private UserRepository userRepository;
 	private BlogResponse blogResponse;
 	private ResponseStructure<Boolean> titleStrecture;
+	private ContributionPanelRepository panelRepository;
 
 
 
 	public BlogServiceImpl(BlogRepository blogRepository, ResponseStructure<BlogResponse> responseStrecture,
-			UserRepository userRepository, BlogResponse blogResponse, ResponseStructure<Boolean> titleStrecture) {
+			UserRepository userRepository, BlogResponse blogResponse, ResponseStructure<Boolean> titleStrecture,
+			ContributionPanelRepository panelRepository) {
 		super();
 		this.blogRepository = blogRepository;
 		this.responseStrecture = responseStrecture;
 		this.userRepository = userRepository;
 		this.blogResponse = blogResponse;
 		this.titleStrecture = titleStrecture;
+		this.panelRepository = panelRepository;
 	}
 	private Blog mapToBlogEntity(BlogRequestDTO blogRequestDTO) {
 		Blog blog = new Blog();
@@ -63,10 +69,13 @@ public class BlogServiceImpl implements BlogService {
 			if(blogRequestDTO.getTopics().length <1) {
 				throw new TopicNotSpecifiedException("Failed to create Blog Please write content");
 			}
+			
 			Blog blog = mapToBlogEntity(blogRequestDTO);
-			blog.setUsers(Arrays.asList(user));
-
+			ContributionPanel contributionPanel =panelRepository.save(new ContributionPanel());
+			blog.setContributionPanel(contributionPanel);
+			blog.setUser(user);
 			blog = blogRepository.save(blog);
+			
 			userRepository.save(user);
 			return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Blog Created Sucessfully")
 					.setData(mapToBlogResponse(blog)));
@@ -92,14 +101,14 @@ public class BlogServiceImpl implements BlogService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<BlogResponse>> ubdateBlogData(int blogId, BlogRequestDTO updatedBlog) {
-		Blog blog = mapToBlogEntity(updatedBlog);
 		return blogRepository.findById(blogId).map(exBlog->{
+			Blog blog = mapToBlogEntity(updatedBlog);
+			blog.setUser(exBlog.getUser());
 			blog.setBlogId(exBlog.getBlogId());
 			exBlog=blogRepository.save(blog);
 			return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value())
 					.setMessage("Blog Updated Sucessfully")
 					.setData(mapToBlogResponse(blog)));
-			}).orElseThrow(() -> new BlogIdNotFoundException("Blog Id Not Found Please Check"));
+		}).orElseThrow(() -> new BlogIdNotFoundException("Blog Id Not Found Please Check"));
 	}
-
 }

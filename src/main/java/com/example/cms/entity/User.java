@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -34,6 +35,17 @@ public class User {
 	private LocalDate lastModifiedAt;
 	@Column( columnDefinition = "boolean default false")
     private boolean deleteUser  ;
+	
+	@OneToMany(mappedBy = "user")
+	
+	private List<Blog> blogs;
+	
+	public List<Blog> getBlogs() {
+		return blogs;
+	}
+	public void setBlogs(List<Blog> blogs) {
+		this.blogs = blogs;
+	}
 	
 	
 	public int getUserId() {

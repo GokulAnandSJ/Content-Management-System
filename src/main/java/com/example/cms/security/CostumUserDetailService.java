@@ -16,13 +16,11 @@ public class CostumUserDetailService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-	
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByEmail(username).map(user -> 
 		new CostumUserDetails(user)).orElseThrow(() ->
-		new UsernameNotFoundException("User Name Not Found Please Check"));
+		new UsernameNotFoundException("Illegial Access Please Check"));
 	}
 
 }
