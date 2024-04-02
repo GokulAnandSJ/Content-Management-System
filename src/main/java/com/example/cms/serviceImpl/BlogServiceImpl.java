@@ -1,16 +1,12 @@
 package com.example.cms.serviceImpl;
 
-import java.util.Arrays;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.example.cms.DAO.BlogRequestDTO;
 import com.example.cms.DAO.BlogResponse;
 import com.example.cms.entity.Blog;
 import com.example.cms.entity.ContributionPanel;
-import com.example.cms.entity.User;
 import com.example.cms.exception.BlogIdNotFoundException;
 import com.example.cms.exception.TitleNotAvailableException;
 import com.example.cms.exception.TopicNotSpecifiedException;
@@ -85,10 +81,10 @@ public class BlogServiceImpl implements BlogService {
 	@Override
 	public ResponseEntity<ResponseStructure<Boolean>> checkForBlogTitleAvailability(String title) {
 		if(blogRepository.existsByTitle(title)) {
-			return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Title Is Available").setData(true));
+			return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.OK.value()).setMessage("Title Is Already Present").setData(true));
 		}
 
-		return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value()).setMessage("This Title already Exist Please Choose Another Title").setData(false));
+		return ResponseEntity.ok(titleStrecture.setStatusCode(HttpStatus.NOT_ACCEPTABLE.value()).setMessage("Entered Title is Not Takes You can Use").setData(false));
 	}
 
 	@Override
