@@ -12,7 +12,7 @@ import com.example.cms.exception.UserNotFoundById;
 public class UserIdNotFoundExceptionHandler {
 
 	@ExceptionHandler
-	public ResponseEntity<ErrorStructure<String>> userIdNotFound(UserNotFoundById exc){
+	public ResponseEntity<ErrorStructure<String>> handleUserIdNotFound(UserNotFoundById exc){
 		
 		ErrorStructure<String> errorStrecture = new ErrorStructure<>();
 		errorStrecture.setErrorCode(HttpStatus.NOT_FOUND.value());

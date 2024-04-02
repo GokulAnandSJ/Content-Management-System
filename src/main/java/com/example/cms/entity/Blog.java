@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +29,15 @@ public class Blog {
 	@OneToOne
 	private ContributionPanel contributionPanel;
 	
+	@OneToMany(mappedBy = "blog")
+	private List<BlogPost> blogPosts;
+	
+	public List<BlogPost> getBlogPosts() {
+		return blogPosts;
+	}
+	public void setBlogPosts(List<BlogPost> blogPosts) {
+		this.blogPosts = blogPosts;
+	}
 	
 	public ContributionPanel getContributionPanel() {
 		return contributionPanel;
