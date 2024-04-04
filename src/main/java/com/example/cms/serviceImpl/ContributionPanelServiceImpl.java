@@ -1,23 +1,18 @@
 package com.example.cms.serviceImpl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.example.cms.DAO.BlogResponse;
 import com.example.cms.DAO.ContributionPanelResponse;
 import com.example.cms.DAO.UserResponse;
-import com.example.cms.entity.Blog;
 import com.example.cms.entity.ContributionPanel;
 import com.example.cms.entity.User;
 import com.example.cms.exception.IllegalAccessRequestException;
-import com.example.cms.exception.PanelIdAlreadySetException;
 import com.example.cms.exception.PannelNotFoundByIdException;
 import com.example.cms.exception.UserHavingPanelException;
 import com.example.cms.exception.UserIdIsNotFound;
@@ -27,7 +22,7 @@ import com.example.cms.repositary.ContributionPanelRepository;
 import com.example.cms.repositary.UserRepository;
 import com.example.cms.service.ContributionPanelService;
 import com.example.cms.utility.ResponseStructure;
-@Service
+      @Service
 public class ContributionPanelServiceImpl implements ContributionPanelService {
 
 	private ContributionPanelRepository contributionRepository;

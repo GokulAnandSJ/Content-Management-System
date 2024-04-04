@@ -17,6 +17,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -51,6 +52,16 @@ public class BlogPost {
 	
 	@ManyToOne
 	private Blog blog;
+	
+	@OneToOne(mappedBy = "blogPost")
+	private Publish publish;
+	
+	public Publish getPublish() {
+		return publish;
+	}
+	public void setPublish(Publish publish) {
+		this.publish = publish;
+	}
 	
 	
 	public Blog getBlog() {

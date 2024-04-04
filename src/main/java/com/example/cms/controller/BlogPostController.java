@@ -2,6 +2,7 @@ package com.example.cms.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,13 +63,30 @@ public class BlogPostController {
 		return blogPostService.updatePost(blogPostRequestDTO,postId);
 	}
 	
-//	@Operation(description = "this endpoit  is used to update a Post Based On postId", responses = {
-//			@ApiResponse(responseCode = "200", description = "Post is Updated "),
-//			@ApiResponse(responseCode = "400", description = "invalid inputs", content = @Content(schema = @Schema(implementation = ErrorStructure.class))),
-//			@ApiResponse(responseCode = "404", description = "Post Not Found", content = @Content(schema = @Schema(implementation = ErrorStructure.class))) })
-//	@DeleteMapping("/blog-posts/{postId}")
-//	public ResponseEntity<ResponseStructure<BlogPostResponse>> deleteBlogPost(@PathVariable int postId){
-//		return blogPostService.deleteBlogPost(postId);
-//	}
+	@Operation(description = "this endpoit  is used to update a Post Based On postId", responses = {
+			@ApiResponse(responseCode = "200", description = "Post is Updated "),
+			@ApiResponse(responseCode = "400", description = "invalid inputs", content = @Content(schema = @Schema(implementation = ErrorStructure.class))),
+			@ApiResponse(responseCode = "404", description = "Post Not Found", content = @Content(schema = @Schema(implementation = ErrorStructure.class))) })
+	@DeleteMapping("/blog-posts/{postId}")
+	public ResponseEntity<ResponseStructure<String>> deleteBlogPost(@PathVariable int postId){
+		return blogPostService.deleteBlogPost(postId);
+	}
 
+	@Operation(description = "this endpoit  is used to Fetch the Blog  Post Based On postId", responses = {
+			@ApiResponse(responseCode = "200", description = "Post is Fetched "),
+			@ApiResponse(responseCode = "400", description = "invalid inputs", content = @Content(schema = @Schema(implementation = ErrorStructure.class))),
+			@ApiResponse(responseCode = "404", description = "Post Not Found", content = @Content(schema = @Schema(implementation = ErrorStructure.class))) })
+	@GetMapping("/blog-posts/{postId}")
+	public ResponseEntity<ResponseStructure<BlogPostResponse>> fetchBlogPost(@PathVariable int postId){
+		return blogPostService.fetchBlogPost(postId);
+	}
+	
+	@Operation(description = "this endpoit  is used to Find the PostType", responses = {
+			@ApiResponse(responseCode = "200", description = "Post is Fetched "),
+			@ApiResponse(responseCode = "400", description = "invalid inputs", content = @Content(schema = @Schema(implementation = ErrorStructure.class))),
+			@ApiResponse(responseCode = "404", description = "Post Not Found", content = @Content(schema = @Schema(implementation = ErrorStructure.class))) })
+	@GetMapping("/blog-posts/{postId}/Post")
+	public ResponseEntity<ResponseStructure<BlogPostResponse>> findByIdAndPostType(@PathVariable int postId){
+		return blogPostService.findByIdAndPostType(postId);
+	}
 }

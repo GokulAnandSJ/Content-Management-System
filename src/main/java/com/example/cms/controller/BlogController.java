@@ -56,8 +56,8 @@ public class BlogController {
 		return blogService.findBlogById(blogId);
 	}
 	
-	@Operation(description = "this endpoit  is used to Update the Blog Based On BlogId", responses = {
-			@ApiResponse(responseCode = "200", description = "Blog is Updated Sucessfully "),
+	@Operation(description = "this endpoit  is used to Delete the Blog post based on ID", responses = {
+			@ApiResponse(responseCode = "200", description = "Blog is Deleted Sucessfully "),
 			@ApiResponse(responseCode = "400", description = "invalid inputs", content = @Content(schema = @Schema(implementation = ErrorStructure.class))),
 			@ApiResponse(responseCode = "404", description = "Blog Not Found", content = @Content(schema = @Schema(implementation = ErrorStructure.class))) })
 	@PutMapping("/blogs/{blogId}")

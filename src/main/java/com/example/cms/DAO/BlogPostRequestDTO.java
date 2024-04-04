@@ -11,9 +11,6 @@ public class BlogPostRequestDTO {
 	private String subTitle;
 	private String summary;
 	private PostType postType;
-//	private String seoTitle;
-//	private String seoDescription;
-//	private String[] seoTopics;
 	
 	public String getTitle() {
 		return title;
@@ -39,24 +36,5 @@ public class BlogPostRequestDTO {
 	public void setPostType(PostType postType) {
 		this.postType = postType;
 	}
-//	public String getSeoTitle() {
-//		return seoTitle;
-//	}
-//	public void setSeoTitle(String seoTitle) {
-//		this.seoTitle = seoTitle;
-//	}
-//	public String getSeoDescription() {
-//		return seoDescription;
-//	}
-//	public void setSeoDescription(String seoDescription) {
-//		this.seoDescription = seoDescription;
-//	}
-//	public String[] getSeoTopics() {
-//		return seoTopics;
-//	}
-//	public void setSeoTopics(String[] seoTopics) {
-//		this.seoTopics = seoTopics;
-//	}
-	
 	
 }

@@ -10,9 +10,13 @@ public interface BlogPostService {
 
 	ResponseEntity<ResponseStructure<BlogPostResponse>> createDraft(BlogPostRequestDTO blogPostRequest , int blogId);
 	
-	public ResponseEntity<ResponseStructure<BlogPostResponse>> updatePost(BlogPostRequestDTO blogPostRequest, int postId);
+    ResponseEntity<ResponseStructure<BlogPostResponse>> updatePost(BlogPostRequestDTO blogPostRequest, int postId);
 	
 	ResponseEntity<ResponseStructure<BlogPostResponse>> updateDraft( int postId);
 
-//	ResponseEntity<ResponseStructure<BlogPostResponse>> deleteBlogPost(int postId);
+	ResponseEntity<ResponseStructure<String>> deleteBlogPost(int postId);
+
+	ResponseEntity<ResponseStructure<BlogPostResponse>> fetchBlogPost(int blogPostId);
+
+	ResponseEntity<ResponseStructure<BlogPostResponse>> findByIdAndPostType(int postId);
 }
