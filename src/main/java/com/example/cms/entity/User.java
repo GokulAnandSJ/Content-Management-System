@@ -37,7 +37,6 @@ public class User {
     private boolean deleteUser  ;
 	
 	@OneToMany(mappedBy = "user")
-	
 	private List<Blog> blogs;
 	
 	public List<Blog> getBlogs() {

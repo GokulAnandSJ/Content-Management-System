@@ -12,7 +12,6 @@ import com.example.cms.exception.UserAlreadyExistByEmailException;
 import com.example.cms.exception.UserNotFoundById;
 import com.example.cms.repositary.UserRepository;
 import com.example.cms.service.UserService;
-import com.example.cms.utility.ErrorStructure;
 import com.example.cms.utility.ResponseStructure;
 
 @Service
