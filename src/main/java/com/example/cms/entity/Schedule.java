@@ -1,5 +1,4 @@
 package com.example.cms.entity;
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
