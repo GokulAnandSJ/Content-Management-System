@@ -19,13 +19,21 @@ public class Publish {
 	@OneToOne
 	private BlogPost blogPost;
 	
+	@OneToOne
+	private Schedule schedule;
+	
+	public Schedule getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
 	public BlogPost getBlogPost() {
 		return blogPost;
 	}
 	public void setBlogPost(BlogPost blogPost) {
 		this.blogPost = blogPost;
 	}
-	
 	
 	public int getPublishId() {
 		return publishId;

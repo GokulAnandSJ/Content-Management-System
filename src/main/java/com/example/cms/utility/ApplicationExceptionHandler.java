@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
+	@SuppressWarnings("rawtypes")
 	private ErrorStructure errorStructure;
 
 	public ApplicationExceptionHandler(ErrorStructure errorStructure) {
@@ -22,6 +23,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 		this.errorStructure = errorStructure;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {

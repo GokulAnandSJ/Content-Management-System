@@ -30,12 +30,10 @@ public class BlogPostServiceImpl implements BlogPostService {
 	private UserRepository userRepository;
 	private ContributionPanelRepository contributionPanelRepository;
 	private ResponseStructure<String> stringStrecture;
-	private PublishResponse publishResponseStrecture;
 
 	public BlogPostServiceImpl(BlogRepository blogRepository, BlogPostRepository blogPostRepository,
 			ResponseStructure<BlogPostResponse> responseStrecture, UserRepository userRepository,
-			ContributionPanelRepository contributionPanelRepository, ResponseStructure<String> stringStrecture,
-			PublishResponse publishResponseStrecture) {
+			ContributionPanelRepository contributionPanelRepository, ResponseStructure<String> stringStrecture) {
 		super();
 		this.blogRepository = blogRepository;
 		this.blogPostRepository = blogPostRepository;
@@ -43,21 +41,23 @@ public class BlogPostServiceImpl implements BlogPostService {
 		this.userRepository = userRepository;
 		this.contributionPanelRepository = contributionPanelRepository;
 		this.stringStrecture = stringStrecture;
-		this.publishResponseStrecture = publishResponseStrecture;
 	}
 
-	public BlogPost mapToBlogPostEntity(BlogPostRequestDTO blogPostRequestDTO) {
+	public BlogPost mapToBlogPostEntity(BlogPostRequestDTO blogPostRequestDTO , String email) {
 		BlogPost blogPost = new BlogPost();
 		blogPost.setTitle(blogPostRequestDTO.getTitle());
 		blogPost.setSubTitle(blogPostRequestDTO.getSubTitle());
 		blogPost.setSummary(blogPostRequestDTO.getSummary());
 		blogPost.setPostType(PostType.DRAFT);
+		blogPost.setCreatedBy(email);
+		blogPost.setLastModifiedBy(email);
 		return blogPost;
 	}
 
 	public BlogPostResponse mapToResponse(BlogPost blogPost) {
 		
 		BlogPostResponse blogPostResponses = new BlogPostResponse();
+		blogPostResponses.setCreatedBy(blogPost.getCreatedBy());
 		   blogPostResponses.setTitle(blogPost.getTitle());
 		   blogPostResponses.setPostId(blogPost.getPostId());
 		   blogPostResponses.setSummary(blogPost.getSummary());
@@ -73,10 +73,11 @@ public class BlogPostServiceImpl implements BlogPostService {
 		{
 			return null;
 		}
-		PublishResponse publishResponse = new PublishResponse();
-		 publishResponseStrecture.setPublishId(publishResponse.getPublishId())
-				.setSeoDescription(publishResponse.getSeoDescription()).setSeoTags(publishResponse.getSeoTags())
-				.setSeoTitle(publishResponse.getSeoTitle());
+		PublishResponse publishResponse = new PublishResponse()
+		.setPublishId(publish.getPublishId())
+		.setSeoDescription(publish.getSeoDescription())
+		.setSeoTags(publish.getSeoTags())
+		.setSeoTitle(publish.getSeoTitle());
 	
 	return publishResponse;
 	}
@@ -88,7 +89,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 		return blogRepository.findById(blogId).map(blog -> {
 
 			if (validation(email, blog)) {
-				BlogPost blogPost = mapToBlogPostEntity(blogPostRequest);
+				BlogPost blogPost = mapToBlogPostEntity(blogPostRequest,email);
 				blogPost.setBlog(blog);
 				blogPost = blogPostRepository.save(blogPost);
 				return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value())
@@ -108,6 +109,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 				post.setSubTitle(blogPostRequest.getSubTitle());
 				post.setSummary(blogPostRequest.getSummary());
 				post.setBlog(post.getBlog());
+				post.setLastModifiedBy(email);
 				post = blogPostRepository.save(post);
 				return ResponseEntity.ok(responseStrecture.setStatusCode(HttpStatus.OK.value())
 						.setMessage("post is updated..").setData(mapToResponse(post)));

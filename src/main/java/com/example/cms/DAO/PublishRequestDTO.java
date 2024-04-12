@@ -8,7 +8,16 @@ public class PublishRequestDTO {
 	private String seoTitle;
 	private String seoDescription;
 	private String[] seoTags;
+	private ScheduleRequestDTO schedule;
 	
+	
+	
+	public ScheduleRequestDTO getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(ScheduleRequestDTO schedule) {
+		this.schedule = schedule;
+	}
 	public String getSeoTitle() {
 		return seoTitle;
 	}
