@@ -2,6 +2,7 @@ package com.example.cms.DAO;
 
 import org.springframework.stereotype.Component;
 import com.example.cms.Enums.PostType;
+import com.example.cms.entity.Schedule;
 
 @Component
 public class PublishResponse {
@@ -10,7 +11,7 @@ public class PublishResponse {
 	private String seoTitle;
 	private String seoDescription;
 	private String[] seoTags;
-	
+	private Schedule schedule;
 	
 	public int getPublishId() {
 		return publishId;
@@ -40,4 +41,12 @@ public class PublishResponse {
 		this.seoTags = seoTags;
 		return this;
 	}
+	public Schedule getSchedule() {
+		return schedule;
+	}
+	public PublishResponse setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+		return this;
+	}
+
 }
