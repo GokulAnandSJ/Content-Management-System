@@ -35,9 +35,6 @@ public class BlogPost {
 	@Size(min = 500, max =3000, message = "Summary Contain at least 500 Character")
 	private String summary;
 	private PostType postType;
-//	private String seoTitle;
-//	private String seoDescription;
-//	private String[] seoTopics;
 	@CreatedDate
 	@Column(updatable = false)
 	private LocalDate createdAt;
@@ -48,7 +45,6 @@ public class BlogPost {
 	private String createdBy;
 	@LastModifiedBy
 	private String lastModifiedBy;
-	
 	
 	@ManyToOne
 	private Blog blog;
@@ -100,24 +96,6 @@ public class BlogPost {
 	public void setPostType(PostType postType) {
 		this.postType = postType;
 	}
-//	public String getSeoTitle() {
-//		return seoTitle;
-//	}
-//	public void setSeoTitle(String seoTitle) {
-//		this.seoTitle = seoTitle;
-//	}
-//	public String getSeoDescription() {
-//		return seoDescription;
-//	}
-//	public void setSeoDescription(String seoDescription) {
-//		this.seoDescription = seoDescription;
-//	}
-//	public String[] getSeoTopics() {
-//		return seoTopics;
-//	}
-//	public void setSeoTopics(String[] seoTopics) {
-//		this.seoTopics = seoTopics;
-//	}
 	public LocalDate getCreatedAt() {
 		return createdAt;
 	}
@@ -142,5 +120,4 @@ public class BlogPost {
 	public void setLastModifiedBy(String lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
-	
 }

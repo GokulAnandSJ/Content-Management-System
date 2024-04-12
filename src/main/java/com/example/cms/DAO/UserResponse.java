@@ -2,7 +2,6 @@ package com.example.cms.DAO;
 
 import java.time.LocalDate;
 
-import org.hibernate.type.descriptor.java.LocalDateTimeJavaType;
 import org.springframework.stereotype.Component;
 
 @Component

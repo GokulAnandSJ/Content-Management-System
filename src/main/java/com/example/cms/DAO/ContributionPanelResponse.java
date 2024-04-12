@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.example.cms.entity.User;
-
-
 @Component
 public class ContributionPanelResponse {
 

@@ -30,12 +30,9 @@ public class ContributionPanel {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-
-	
 	public int getPanelId() {
 		return panelId;
 	}
-
 	public void setPanelId(int panelId) {
 		this.panelId = panelId;
 	}

@@ -1,7 +1,6 @@
 package com.example.cms.DAO;
 
 import org.springframework.stereotype.Component;
-import com.example.cms.Enums.PostType;
 import com.example.cms.entity.Schedule;
 
 @Component

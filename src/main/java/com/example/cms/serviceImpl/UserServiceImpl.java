@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<ResponseStructure<String>> softDelete(int userId) {
 		
-
 		return userRepository.findById(userId).map(user ->{
 			 user.setDeleteUser(true);
 			userRepository.save(user);
@@ -74,8 +73,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResponseEntity<ResponseStructure<UserResponse>> findUserById(int userId) {
-		
-		
 		
 		return userRepository.findById(userId).map(user -> {
 			if(user.isDeleteUser()==false) 

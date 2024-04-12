@@ -15,10 +15,8 @@ public class Publish {
 	private String seoTitle;
 	private String seoDescription;
 	private String[] seoTags;
-	
 	@OneToOne
 	private BlogPost blogPost;
-	
 	@OneToOne
 	private Schedule schedule;
 	
