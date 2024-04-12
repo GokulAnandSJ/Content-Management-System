@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cms.DAO.ContributionPanelResponse;
-import com.example.cms.entity.ContributionPanel;
 import com.example.cms.service.ContributionPanelService;
 import com.example.cms.utility.ErrorStructure;
 import com.example.cms.utility.ResponseStructure;

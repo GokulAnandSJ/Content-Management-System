@@ -8,7 +8,6 @@ public class IllegalAccessRequestException extends RuntimeException {
 		
 		this.message = message;
 	}
-
 	public String getMessage() {
 		return message;
 	}
