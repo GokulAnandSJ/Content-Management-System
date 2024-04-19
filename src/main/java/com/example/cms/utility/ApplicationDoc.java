@@ -27,3 +27,4 @@ public class ApplicationDoc {
 		return new OpenAPI().info(info().contact(contact()));
 	}
 }
+	

@@ -2,6 +2,7 @@ package com.example.cms.entity;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -30,7 +32,17 @@ public class User {
 	private LocalDate createdAt;
 	@LastModifiedDate
 	private LocalDate lastModifiedAt;
+	@Column( columnDefinition = "boolean default false")
+    private boolean deleteUser  ;
+	@OneToMany(mappedBy = "user")
+	private List<Blog> blogs;
 	
+	public List<Blog> getBlogs() {
+		return blogs;
+	}
+	public void setBlogs(List<Blog> blogs) {
+		this.blogs = blogs;
+	}
 	
 	public int getUserId() {
 		return userId;
@@ -68,8 +80,10 @@ public class User {
 	public void setLastModifiedAt(LocalDate lastModifiedAt) {
 		this.lastModifiedAt = lastModifiedAt;
 	}
-	
-	
-	
-	
+	public boolean isDeleteUser() {
+		return deleteUser;
+	}
+	public void setDeleteUser(boolean deleteUsre) {
+		this.deleteUser = deleteUsre;
+	}
 }
